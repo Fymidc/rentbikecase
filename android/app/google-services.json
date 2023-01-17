@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "577087440383",
+    "project_id": "bike-rent-5d5fc",
+    "storage_bucket": "bike-rent-5d5fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577087440383:android:46d5b3425970fff32bd3ca",
+        "android_client_info": {
+          "package_name": "com.bikerentcaseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "577087440383-mdv4rocbuf5u5po9l69pkune9rn8a16f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXrTz04QeubI83TlWdrBEorYSiOK9AjP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577087440383-mdv4rocbuf5u5po9l69pkune9rn8a16f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
