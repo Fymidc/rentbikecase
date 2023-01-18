@@ -5,13 +5,13 @@ import { AirbnbRating } from '@rneui/themed';
 
 const BikeCard = (props) => {
 //console.log(props.val)
-const [rating, setRating] = useState("")
-const navdetail =()=>{
-    if(props.route !== "Detail"){
+    const [rating, setRating] = useState("")
+    const navdetail =()=>{
+        if(props.route !== "Detail"){
 
         props.navigation.navigate("Detail",{brand:props.val?.brand,key:props.id})
+        }
     }
-}
 
     return (
         <TouchableOpacity onPress={()=>navdetail()} activeOpacity={0.8} style={{
@@ -21,7 +21,7 @@ const navdetail =()=>{
             width: "80%",
             alignSelf: "center",
             borderRadius: 25,
-            marginBottom:15
+            marginVertical:15
         }} >
             <View style={{flex:1 ,padding:10 }} >
 

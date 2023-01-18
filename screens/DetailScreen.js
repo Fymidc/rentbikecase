@@ -5,38 +5,50 @@ import { AirbnbRating } from '@rneui/themed';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import database from '@react-native-firebase/database';
 
-const DetailScreen = ({route}) => {
+const DetailScreen = ({ route }) => {
     //default rating propsdan gelecek.
-    const {brand,key} = route.params
+    const { brand, key } = route.params
     console.log(route.name)
     const [rating, setRating] = useState("")
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [data, setdata] = useState([])
 
-    console.log("key",key)
+    console.log("key", key)
 
     useEffect(() => {
         database()
-        .ref(`/${key}`)
-        .once('value')
-        .then(snapshot => {
-            setdata(snapshot.val())
-           // console.log('detailsden gelen data: ', snapshot.val());
-        });
-    }, [])
-    
+            .ref(`/${key}`)
+            .once('value')
+            .then(snapshot => {
+                setdata(snapshot.val())
+                // console.log('detailsden gelen data: ', snapshot.val());
+            });
+    }, [data])
+
+    const updatereserve = () => {
+      
+    }
+
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
-       // console.log("show")
+        // console.log("show")
     };
     const hideDatePicker = () => {
         setDatePickerVisibility(false);
-      };
+    };
 
     const handleConfirm = (date) => {
-        const ndate = new Date(date).toDateString().slice(0,10)
         
+        const ndate = new Date(date).toDateString().slice(0, 10)
+        database()
+        .ref(`/${key}`)
+        .update({
+            date:ndate,
+            reserved:true
+        })
+        .then(() => console.log('Data updated.'))
+        .catch((e)=>console.log(e.message))
         //console.log("A date has been picked: ", ndate);
         hideDatePicker();
     };
@@ -78,7 +90,7 @@ const DetailScreen = ({route}) => {
                                 backgroundColor: "#222222",
                                 alignSelf: "center",
                                 padding: 15
-                            }} activeOpacity={0.7} onPress={()=>showDatePicker()} ><Text style={{ fontSize: 16, color: "white", textAlign: "center" }} >Reserve</Text></TouchableOpacity  >
+                            }} activeOpacity={0.7} onPress={() => showDatePicker()} ><Text style={{ fontSize: 16, color: "white", textAlign: "center" }} >Reserve</Text></TouchableOpacity  >
                         </View>
                     </View>
                 </View>

@@ -11,6 +11,7 @@ const HomeScreen = ({ navigation }) => {
     const [model, setmodel] = useState(null)
     const [color, setcolor] = useState(null)
     const [rating, setrating] = useState(null)
+    const [date, setdate] = useState(null)
 
     const [data, setdata] = useState([])
 
@@ -19,18 +20,18 @@ const HomeScreen = ({ navigation }) => {
     // console.log("color",color)
     // console.log("rating",rating)
 
-    const deneme = data.filter(x=>x.location === location | x.color === color | x.brand === model | x.rating === rating)
+    const deneme = data.filter(x=>x.rating === rating)
 
     console.log("deneme",deneme)
 
    
-    let filter = {
-        brand:model,
-        color:color,
-        location:location,
-        reserved:false,
-        rating:rating
-      };
+    // let filter = {
+    //     brand:model,
+    //     color:color,
+    //     location:location,
+    //     reserved:false,
+    //     rating:rating
+    //   };
     useEffect(() => {
         database()
             .ref('/')
@@ -39,7 +40,7 @@ const HomeScreen = ({ navigation }) => {
                 setdata(snapshot.val())
                 //console.log('User data: ', snapshot.val());
             });
-    }, [location,model,color,rating])
+    }, [location,model,color,rating,date])
 
  console.log(location)
 
@@ -53,17 +54,32 @@ const HomeScreen = ({ navigation }) => {
             setmodel={setmodel}
             model={model}
              setlocation={setlocation}
-              location={location} />
-            <Text style={{ marginVertical: 20, fontSize: 18, paddingHorizontal: 20 }} >{data.length} Results</Text>
+              location={location} 
+             setdate={setdate}
+              date={date} />
             <View  >
                 <ScrollView>
-                    { location | color | model | rating === null ? data.map((val,index)=>(
+                  
+                {rating === null && model === null && color === null && date === null &&  location === "All" && data.map((val,index)=>(
                         <BikeCard key={index} id={index} val={val}  navigation={navigation} />
-                    )) : 
-                    data.filter(x=>x.location === location | x.color === color | x.brand === model | x.rating === rating).map((val,index)=>(
+                    ))}  
+                  { data.filter(x=>x.location === location ).map((val,index)=>(
                         <BikeCard key={index} id={index} val={val}  navigation={navigation} />
-                    ))
-                     }
+                    ))}
+                  { data.filter(x=>x.date === date ).map((val,index)=>(
+                        <BikeCard key={index} id={index} val={val}  navigation={navigation} />
+                    ))}
+                  { data.filter(x=>x.brand === model ).map((val,index)=>(
+                        <BikeCard key={index} id={index} val={val}  navigation={navigation} />
+                    ))}
+                  { data.filter(x=>x.color === color ).map((val,index)=>(
+                        <BikeCard key={index} id={index} val={val}  navigation={navigation} />
+                    ))}
+                  { data.filter(x=>x.rating === rating ).map((val,index)=>(
+                        <BikeCard key={index} id={index} val={val}  navigation={navigation} />
+                    ))}
+                    
+                   
             
                     
                 </ScrollView>
@@ -75,12 +91,3 @@ const HomeScreen = ({ navigation }) => {
 
 export default HomeScreen
 
-//create login and register screen
-//connetct firebase and try log in and log out
-//bike will those : model,color,location,rating,and vheckbox for available or not
-
-//see a list of bikes for available dates
-//rate the bikes
-//filter bikes
-//reserve a bike
-//cancel reserve

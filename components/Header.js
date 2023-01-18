@@ -11,7 +11,7 @@ const Header = (props) => {
     const [open, setOpen] = useState(false);
     //const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: 'All', value: null },
+        { label: 'All', value: "All" },
         { label: 'beşiktaş', value: 'beşiktaş' },
         { label: 'taksim', value: 'taksim' },
         { label: 'beykoz', value: 'beykoz' }
@@ -32,12 +32,13 @@ const Header = (props) => {
     };
     const hideDatePicker = () => {
         setDatePickerVisibility(false);
+        props.setdate(null)
       };
 
     const handleConfirm = (date) => {
         const ndate = new Date(date).toDateString().slice(0,10)
-        
-        console.log("A date has been picked: ", ndate);
+        props.setdate(ndate)
+        //console.log("A date has been picked: ", ndate);
         hideDatePicker();
     };
 

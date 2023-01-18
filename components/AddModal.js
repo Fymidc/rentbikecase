@@ -33,11 +33,11 @@ const AddModal = (props) => {
     { label: 'mosso', value: 'mosso' }
   ]);
   const [rateitems, setrateItems] = useState([
-    { label: '1', value: '1' },
-    { label: '2', value: '2' },
-    { label: '3', value: '3' },
-    { label: '4', value: '4' },
-    { label: '5', value: '5' },
+    { label: '1', value: 1 },
+    { label: '2', value: 2 },
+    { label: '3', value: 3 },
+    { label: '4', value: 4 },
+    { label: '5', value: 5 },
   ]);
   const onclosemodal = () => {
     props.setlocation(null)
@@ -75,18 +75,7 @@ const AddModal = (props) => {
                 />
               </View>
 
-              <View style={styles.downpicker} >
-
-                <DropdownPicker
-                  placeholder={"Select Location"}
-                  open={localopen}
-                  value={props.location}
-                  items={localitems}
-                  setOpen={setlocalOpen}
-                  setValue={props.setlocation}
-                  setItems={setlocalItems}
-                />
-              </View>
+              
 
               <View style={styles.downpicker} >
 
@@ -163,7 +152,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     width: "85%",
-    height: 420,
+    height: 170,
     flex: 1
   },
   button: {
