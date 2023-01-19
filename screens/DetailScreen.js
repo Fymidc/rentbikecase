@@ -4,16 +4,17 @@ import BikeCard from '../components/BikeCard'
 import { AirbnbRating } from '@rneui/themed';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import database from '@react-native-firebase/database';
+import auth from "@react-native-firebase/auth"
 
 const DetailScreen = ({ route }) => {
-    //default rating propsdan gelecek.
+   
     const { brand, key } = route.params
-    console.log(route.name)
+
+   const [user, setuser] = useState("")
     const [rating, setRating] = useState("")
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [data, setdata] = useState([])
 
-    console.log("key", key)
 
     useEffect(() => {
         database()
@@ -21,42 +22,58 @@ const DetailScreen = ({ route }) => {
             .once('value')
             .then(snapshot => {
                 setdata(snapshot.val())
-                // console.log('detailsden gelen data: ', snapshot.val());
+               
             });
+            auth().onAuthStateChanged(user =>{
+                if(user){
+                 
+                  setuser(user)
+                }
+              })
     }, [data])
+  
+    const cancelreserve = () => {
 
-    const updatereserve = () => {
-      
+        database()
+            .ref(`/${key}`)
+            .update({
+                date: "",
+                reserved: false,
+                uid:""
+            })
+            .then(() => console.log('Data updated.'))
+            .catch((e) => console.log(e.message))
     }
 
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
-        // console.log("show")
+     
     };
     const hideDatePicker = () => {
         setDatePickerVisibility(false);
     };
 
     const handleConfirm = (date) => {
-        
+
         const ndate = new Date(date).toDateString().slice(0, 10)
         database()
-        .ref(`/${key}`)
-        .update({
-            date:ndate,
-            reserved:true
-        })
-        .then(() => console.log('Data updated.'))
-        .catch((e)=>console.log(e.message))
-        //console.log("A date has been picked: ", ndate);
+            .ref(`/${key}`)
+            .update({
+                date: ndate,
+                reserved: true,
+                uid:user.uid
+            })
+            .then(() => console.log('Data updated.'))
+            .catch((e) => console.log(e.message))
+      
         hideDatePicker();
     };
-    //console.log(rating)
+   
     return (
         <View style={{ flex: 1 }} >
             <View style={{
-                backgroundColor: "#2D033B",
+                backgroundColor:"#DA3124",
                 width: "100%",
                 height: 250,
                 borderBottomRightRadius: 35,
@@ -84,13 +101,26 @@ const DetailScreen = ({ route }) => {
                             />
                         </View>
                         <View>
-
-                            <TouchableOpacity style={{
-                                width: "80%",
-                                backgroundColor: "#222222",
-                                alignSelf: "center",
-                                padding: 15
-                            }} activeOpacity={0.7} onPress={() => showDatePicker()} ><Text style={{ fontSize: 16, color: "white", textAlign: "center" }} >Reserve</Text></TouchableOpacity  >
+                            { data.uid === user.uid ? 
+                        <TouchableOpacity style={{
+                            width: "80%",
+                            backgroundColor: "#222222",
+                            alignSelf: "center",
+                            padding: 15
+                        }} activeOpacity={0.7} onPress={() => cancelreserve()} >
+                            <Text style={{ fontSize: 16, color: "white", textAlign: "center" }} >Cancel Reservation</Text>
+                        </TouchableOpacity  >
+                        :
+                        <TouchableOpacity style={{
+                            width: "80%",
+                            backgroundColor: "#222222",
+                            alignSelf: "center",
+                            padding: 15
+                        }} activeOpacity={0.7} onPress={() => showDatePicker()} >
+                            <Text style={{ fontSize: 16, color: "white", textAlign: "center" }} >Reserve</Text>
+                        </TouchableOpacity  >    
+                        }
+                            
                         </View>
                     </View>
                 </View>

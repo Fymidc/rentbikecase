@@ -4,7 +4,6 @@ import MaterialIcons  from 'react-native-vector-icons/MaterialIcons'
 import { AirbnbRating } from '@rneui/themed';
 
 const BikeCard = (props) => {
-//console.log(props.val)
     const [rating, setRating] = useState("")
     const navdetail =()=>{
         if(props.route !== "Detail"){

@@ -10,16 +10,6 @@ const AddModal = (props) => {
   const [coloropen, setcolorOpen] = useState(false);
   const [rateopen, setrateOpen] = useState(false);
 
-  //const [value, setValue] = useState(null);
-
-  //console.log("modaldan gelen",value)
-
-  const [localitems, setlocalItems] = useState([
-    { label: 'All', value: null },
-    { label: 'beşiktaş', value: 'beşiktaş' },
-    { label: 'taksim', value: 'taksim' },
-    { label: 'beykoz', value: 'beykoz' }
-  ]);
   const [coloritems, setcolorItems] = useState([
     { label: 'red', value: 'red' },
     { label: 'yellow', value: 'yellow' },
@@ -40,7 +30,6 @@ const AddModal = (props) => {
     { label: '5', value: 5 },
   ]);
   const onclosemodal = () => {
-    props.setlocation(null)
     props.setmodel(null)
     props.setcolor(null)
     props.setrating(null)

@@ -9,7 +9,6 @@ import auth from "@react-native-firebase/auth"
 
 const Header = (props) => {
     const [open, setOpen] = useState(false);
-    //const [value, setValue] = useState(null);
     const [items, setItems] = useState([
         { label: 'All', value: "All" },
         { label: 'beşiktaş', value: 'beşiktaş' },
@@ -20,7 +19,6 @@ const Header = (props) => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     
-
     const logout=()=>{
         auth().signOut().then((res)=>{
             console.log(res)
@@ -38,17 +36,16 @@ const Header = (props) => {
     const handleConfirm = (date) => {
         const ndate = new Date(date).toDateString().slice(0,10)
         props.setdate(ndate)
-        //console.log("A date has been picked: ", ndate);
         hideDatePicker();
     };
 
 
     return (
-        <View style={{ elevation: 4, zIndex: 22, padding: 20, borderBottomColor: "red" }} >
+        <View style={{ elevation: 4, zIndex: 22, padding: 20, backgroundColor:"#DA3124"}} >
             <View style={{flexDirection:"row",justifyContent:"space-between"}} >
 
-                <Text style={{ fontSize: 25, fontWeight: "800", color: "black" }} >Choose A Bike</Text>
-                <Ionicons onPress={()=> logout()} style={{paddingHorizontal:10}} name='log-out-outline' size={25} />
+                <Text style={{ fontSize: 25, fontWeight: "800", color: "white" }} >Choose A Bike</Text>
+                <Ionicons onPress={()=> logout()} style={{paddingHorizontal:10}} name='log-out-outline' color={"white"} size={25} />
             </View>
             <View style={{ flexDirection: "row", marginTop: 15, justifyContent: "space-around", alignItems: "center" }} >
                 <DropdownPicker
@@ -61,13 +58,11 @@ const Header = (props) => {
                     setValue={props.setlocation}
                     setItems={setItems}
                 />
-                <Fontisto onPress={() => showDatePicker()} style={{ paddingHorizontal: 10 }} name='date' size={25} />
-                <Ionicons onPress={() => setVisible(true)} style={{ paddingHorizontal: 10 }} name='filter' size={25} />
+                <Fontisto onPress={() => showDatePicker()} style={{ paddingHorizontal: 10 }} color={"white"} name='date' size={25} />
+                <Ionicons onPress={() => setVisible(true)} style={{ paddingHorizontal: 10 }} color={"white"} name='filter' size={25} />
 
             </View>
             <AddModal
-            setlocation={props.setlocation}
-            location={props.location}
             setrating={props.setrating}
             rating={props.rating}
             setcolor={props.setcolor}

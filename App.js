@@ -65,11 +65,11 @@ export function AppNavigationContainer() {
   useEffect(() => {
   auth().onAuthStateChanged(user =>{
     if(user){
+    
       setsignedin (true)
     }else{
       setsignedin (false)
     }
-    console.log(isloggedin)
   })
   }, [])
   

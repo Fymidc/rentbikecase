@@ -28,19 +28,17 @@ const Login = ({navigation}) => {
           setsubmitting(false)
         }
     
-        console.error(error)
       })
     } catch (error) {
-      console.log(error.message)
+     
       setsubmitting(false)
     }    
-    //setsubmitting(false)
-    //resetForm({})
+ 
   }
   return (
     <View style={style.container} >
       <View style={style.header} >
-        <Text style={{fontSize:30,fontWeight:"700",textAlign:"center"}} >Lets Ride</Text>
+        <Text style={{fontSize:30,fontWeight:"700",textAlign:"center",color:"white"}} >Lets Ride</Text>
       </View>
       <Formik
 
@@ -88,7 +86,7 @@ const Login = ({navigation}) => {
               disabled={!isValid || isSubmitting}
               onPress={handleSubmit} > 
 
-                <Text style={{fontSize:18,fontWeight:"700",color:"white"}} >Log in</Text>
+                <Text style={{fontSize:18,fontWeight:"700",color:"black"}} >Log in</Text>
               </TouchableOpacity>
             </View>
             <View>
@@ -108,6 +106,7 @@ export default Login
 const style = StyleSheet.create({
   container:{
     flex:1,
+    backgroundColor:"#DA3124",
     justifyContent:"center",
     alignItems:"center"
   },
@@ -117,7 +116,7 @@ const style = StyleSheet.create({
   input:{
     padding:15,
     borderRadius:10,
-    backgroundColor:"grey"
+    backgroundColor:"white"
   },
   header:{
     marginBottom:30
@@ -125,7 +124,7 @@ const style = StyleSheet.create({
   button:{
     paddingHorizontal:10,
     paddingVertical:15,
-    backgroundColor:"tomato",
+    backgroundColor:"white",
     width:"100%",
     justifyContent:"center",
     alignItems:"center"
